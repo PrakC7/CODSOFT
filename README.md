@@ -100,8 +100,8 @@ python password_generator.py
 
 2. Clone this repository:
    bash
-   git clone https://github.com/PrakC7/codsoft-python-projects.git
-   cd codsoft-python-projects
+   git clone https://github.com/PrakC7/CODSOFT
+   cd CODSOFT
    
 
 3. Navigate into any project folder and run the corresponding Python file.
