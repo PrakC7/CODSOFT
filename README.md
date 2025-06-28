@@ -87,7 +87,7 @@ bash
 python password_generator.py
 
 
-> 🔑 *Default Master Password:* PrakC7 generator
+> 🔑 *Master Password:* saved
 
 ---
 
