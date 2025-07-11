@@ -12,7 +12,31 @@ def click(event=None, key=None):
     elif btn_text == "=" or key == "Return":
         try:
             expr = entry_var.get().replace("×", "*").replace("÷", "/").replace("^", "**")
-            expr = expr.replace("√", "math.sqrt")
+
+            # Handle square root: replace √number or √(expression) with math.sqrt(...)
+            while "√" in expr:
+                idx = expr.find("√")
+                if idx + 1 < len(expr) and expr[idx+1] == "(":
+                    # √(expression)
+                    bracket_count = 1
+                    i = idx + 2
+                    while i < len(expr) and bracket_count > 0:
+                        if expr[i] == "(":
+                            bracket_count += 1
+                        elif expr[i] == ")":
+                            bracket_count -= 1
+                        i += 1
+                    inside = expr[idx+2:i-1]
+                    expr = expr[:idx] + f"math.sqrt({inside})" + expr[i:]
+                else:
+                    # √number
+                    i = idx + 1
+                    num = ""
+                    while i < len(expr) and (expr[i].isdigit() or expr[i] == "."):
+                        num += expr[i]
+                        i += 1
+                    expr = expr[:idx] + f"math.sqrt({num})" + expr[idx + 1 + len(num):]
+
             result = eval(expr, {"math": math})
             entry_var.set(str(round(result, 5)))
         except Exception:
